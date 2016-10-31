@@ -5,17 +5,17 @@ require 'pony'
 require 'sqlite3'
 
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS
-	"Users"
-	(
-	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"username" TEXT,
-	"phone" TEXT,
-	"datestamp" TEXT,
-	"barber" TEXT,
-	"color" TEXT
-	)'
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS
+		"Users"
+		(
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"username" TEXT,
+			"phone" TEXT,
+			"datestamp" TEXT,
+			"barber" TEXT,
+			"color" TEXT
+		)'
 end
 
 get '/' do
@@ -52,7 +52,24 @@ post '/visit' do
 		return erb :visit
 	end
 
+	db = get_db
+	db.execute 'insert into
+			Users
+			(
+				username,
+				phone,
+				datestamp,
+				barber,
+				color
+			)
+			values (?,?,?,?,?)', [@username, @phone, @datetime, @barber, @color]
+
 	erb "Ok! username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
+
+end
+
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
 end
 
 post '/contacts' do
@@ -61,9 +78,9 @@ post '/contacts' do
 	@email = params[:email]
 	@message_contacts = params[:message_contacts]
 
-	hh1 = {:name => 'Ведите имя', :email => 'Ведите email адрес', :message_contacts => 'Введите сообщение'}
+	hash = {:name => 'Ведите имя', :email => 'Ведите email адрес', :message_contacts => 'Введите сообщение'}
 
-	@error = hh1.select {|key,_| params[key] == ''}.values.join(", ")
+	@error = hash.select {|key,_| params[key] == ''}.values.join(", ")
 
 	if @error !=''
 		return erb :contacts
