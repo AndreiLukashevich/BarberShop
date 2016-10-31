@@ -1,0 +1,19 @@
+<h2>Отправить сообщение на почту</h2>
+<p>На этой странице вы сможете отправить нам сообщение </p>
+
+<form action="/contacts" method="POST" role="form">
+  <div class="form-group">
+    <label for="exampleInputName">Name</label>
+    <input name="name" type="text" class="form-control" id="exampleInputName" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail">Email address</label>
+    <input name="email" type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputMessage">Input message</label>
+    <textarea name="message_contacts" class="form-control" rows="3"></textarea>
+  </div>
+
+  <button type="Отправить" class="btn btn-default">Submit</button>
+</form>
