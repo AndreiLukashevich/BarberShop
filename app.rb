@@ -75,8 +75,29 @@ post '/visit' do
 end
 
 get '/showusers' do
-	erb 'Hello'
+	erb :showusers
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 post '/contacts' do
