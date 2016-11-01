@@ -4,6 +4,12 @@ require 'sinatra/reloader'
 require 'pony'
 require 'sqlite3'
 
+def get_db
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
+end
+
 configure do
 	db = get_db
 	db.execute 'CREATE TABLE IF NOT EXISTS
@@ -72,11 +78,6 @@ get '/showusers' do
 	erb 'Hello'
 end
 
-def get_db
-	db = SQLite3::Database.new 'barbershop.db'
-	db.results_as_hash = true
-	return db
-end
 
 post '/contacts' do
 
