@@ -1,15 +1,24 @@
 
-<%= @results %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Дата записи</th>
+        <th>Парикмахерская</th>
+        <th>Цвет</th>
+    </tr>
+  </thead>
 
-<table class="table">
-  <% @results.each do |row| %>
-      <tr>
-          <td><%= row['username'] %></td>
-          <td><%= row['phone'] %></td>
-          <td><%= row['datestamp'] %></td>
-          <td><%= row['barber'] %></td>
-          <td><%= row['color'] %></td>
-      </tr>
-  <% end %>
-
+  <body>
+    <% @results.each do |row| %>
+        <tr>
+            <td><%= row['username'] %></td>
+            <td><%= row['phone'] %></td>
+            <td><%= row['datestamp'] %></td>
+            <td><%= row['barber'] %></td>
+            <td><%= row['color'] %></td>
+        </tr>
+    <% end %>
+  </body>
 </table>
